@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherMvc", "PusherMvc\PusherMvc.csproj", "{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherMvc.Tests", "PusherMvc.Tests\PusherMvc.Tests.csproj", "{255D2776-EC87-40F1-81D4-E35E2B55E15D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{255D2776-EC87-40F1-81D4-E35E2B55E15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{255D2776-EC87-40F1-81D4-E35E2B55E15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{255D2776-EC87-40F1-81D4-E35E2B55E15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{255D2776-EC87-40F1-81D4-E35E2B55E15D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
