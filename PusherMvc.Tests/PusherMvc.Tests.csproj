@@ -104,9 +104,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PusherMvc\PusherMvc.csproj">
+    <ProjectReference Include="..\PusherMvc.Web\PusherMvc.Web.csproj">
       <Project>{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}</Project>
-      <Name>PusherMvc</Name>
+      <Name>PusherMvc.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

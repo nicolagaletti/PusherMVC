@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherMvc", "PusherMvc\PusherMvc.csproj", "{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}"
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherMvc.Web", "PusherMvc.Web\PusherMvc.Web.csproj", "{FEC6A0AD-FCF7-4051-B93F-49D098B5EACE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherMvc.Tests", "PusherMvc.Tests\PusherMvc.Tests.csproj", "{255D2776-EC87-40F1-81D4-E35E2B55E15D}"
 EndProject
