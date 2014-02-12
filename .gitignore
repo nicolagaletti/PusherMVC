@@ -108,4 +108,9 @@ Backup*/
 UpgradeLog*.XML
 
 # RavenDB
-/PusherMvc.Web/RavenDB/Database/*
+**/RavenDB/Database/
+**/RavenDB/Plugins/
+**/RavenDB/Analyzers/
+**/RavenDB/Raven/
+!**/RavenDB/
+!**/RavenDB/[Bb]in/
