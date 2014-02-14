@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using PusherMvc.Web.Repositories;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -15,6 +16,10 @@ namespace PusherMvc.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //initialize Document store. We want to do it in app start as a singleton because it is an expensive operation
+            DataDocumentStore.Initialize();
+
         }
     }
 }

@@ -19,7 +19,7 @@ namespace PusherMvc.Web.Models
             set;
         }
 
-        public string ImageId
+        public string Id
         {
             get;
             set;

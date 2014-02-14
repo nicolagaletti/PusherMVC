@@ -7,7 +7,7 @@ namespace PusherMvc.Web.Models
 {
     public class ProductModel
     {
-        public string ProductId
+        public string Id
         {
             get;
             set;
