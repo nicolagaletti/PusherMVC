@@ -6,7 +6,7 @@ using Raven.Client.Document;
 using Raven.Client.Embedded;
 using Raven.Client;
 
-namespace PusherMvc.Web.App_Start
+namespace PusherMvc.Web.Repositories
 {
     public class DataDocumentStore
     {
@@ -31,6 +31,7 @@ namespace PusherMvc.Web.App_Start
                 ConnectionStringName = "RavenDB"
             };
 
+            //by default ravendb separate parts with / but this could cause a problem with the routing engine
             _instance.Conventions.IdentityPartsSeparator = "-";
 
             return _instance;
