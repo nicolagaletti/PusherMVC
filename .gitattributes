@@ -1,0 +1,69 @@
+###################
+# Example
+###################
+
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files we want to always be normalized and converted 
+# to native line endings on checkout.
+#*.c text
+#*.h text
+
+# Declare files that will always have CRLF line endings on checkout.
+#*.sln text eol=crlf
+
+# Denote all files that are truly binary and should not be modified.
+#*.png binary
+#*.jpg binary
+
+###################
+# /Example
+###################
+
+* text
+
+*.bmp binary
+*.dll binary
+*.gif binary
+*.jpg binary
+*.png binary
+*.snk binary
+
+*.ascx text
+*.cd text
+*.cmd text
+*.coffee text
+*.config text
+*.cs text diff=csharp 
+*.csproj text merge=union 
+*.cshtml text
+*.css text
+*.dtd text
+*.edmx text
+*.htm text
+*.html text
+*.js text
+*.json text
+*.msbuild text
+*.nuspec text
+*.resx text
+*.ruleset text
+*.StyleCop text
+*.targets text
+*.tt text
+*.txt text
+*.vb text
+*.vbhtml text
+*.vbproj text merge=union 
+*.vbs text
+*.wsf text
+*.xml text
+*.xunit text
+
+# Run 3-way file level merge for text files, but take lines from both versions, 
+# instead of leaving conflict markers. This tends to leave the added lines in 
+# the resulting file in random order and the user should verify the result. 
+# Do not use this if you do not understand the implications.
+*.sln text eol=crlf merge=union
+*.csproj text eol=crlf merge=union
