@@ -25,11 +25,12 @@ namespace PusherMvc.Web.Models
             set;
         }
 
-        public ProductImage[] Images
-        {
-            get;
-            set;
-        }
+        //We ignore images for now
+        //public ProductImage[] Images
+        //{
+        //    get;
+        //    set;
+        //}
 
         public int StockLevel
         {

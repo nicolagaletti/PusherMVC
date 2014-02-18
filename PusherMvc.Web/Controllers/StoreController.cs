@@ -4,18 +4,36 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Raven.Client;
+using PusherMvc.Web.Contracts;
+using PusherMvc.Web.Models;
 
 namespace PusherMvc.Web.Controllers
 {
     public class StoreController : Controller
     {
+        private IDocumentSession _documentStore;
+        private IProductRepository _productRepository;
+
+        public StoreController(IDocumentSession documentStore)
+        {
+            _documentStore = documentStore;
+        }
+
+        //public StoreController(IProductRepository productRepository)
+        //{
+        //    _productRepository = productRepository;
+        //}
+        
         //
         // GET: /Store/
 
         public ActionResult Index()
         {
+            var result = _documentStore.Query<ProductModel>().OrderByDescending(pm => pm.Id).ToArray();
 
-            return View();
+            //var result = _productRepository.ListProducts();
+
+            return View(result);
         }
 
         //
@@ -29,7 +47,7 @@ namespace PusherMvc.Web.Controllers
         //
         // GET: /Store/Create
 
-        public ActionResult Create()
+        public ActionResult CreateProduct()
         {
             return View();
         }
@@ -38,11 +56,12 @@ namespace PusherMvc.Web.Controllers
         // POST: /Store/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateProduct(ProductModel product)
         {
             try
             {
-                // TODO: Add insert logic here
+                _documentStore.Store(product);
+                //_productRepository.CreateProduct(product);
 
                 return RedirectToAction("Index");
             }

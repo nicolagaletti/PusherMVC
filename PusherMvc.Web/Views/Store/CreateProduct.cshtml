@@ -1,0 +1,43 @@
+﻿@model PusherMvc.Web.Models.ProductModel
+
+@{
+    ViewBag.Title = "Add Product";
+    ViewBag.Message = "Add a product here";
+        
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+               test
+            </p>
+        </div>
+    </section>
+}
+
+<h3>Product</h3>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title)
+                @Html.ValidationMessageFor(m => m.Title)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.StockLevel)
+                @Html.TextBoxFor(m => m.StockLevel)
+                @Html.ValidationMessageFor(m => m.StockLevel)
+            </li>
+        </ol>
+        <input type="submit" value="Add" />
+    </fieldset>
+}

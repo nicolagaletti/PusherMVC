@@ -1,18 +1,40 @@
-﻿@model String
+﻿@model PusherMvc.Web.Models.ProductModel[]
+
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
 }
 
-<!DOCTYPE html>
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+               test
+            </p>
+        </div>
+    </section>
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        Doc store:  @Model
-    </div>
-</body>
-</html>
+<h3>Products:</h3>
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Title</td>
+            <td>Stock Level</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(p => product.Id)</td>
+                <td>@Html.DisplayFor(p => product.Title)</td>
+                <td>@Html.DisplayFor(p => product.StockLevel)</td>
+            </tr>
+        }
+    </tbody>
+</table>
