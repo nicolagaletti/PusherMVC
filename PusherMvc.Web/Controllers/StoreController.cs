@@ -11,27 +11,27 @@ namespace PusherMvc.Web.Controllers
 {
     public class StoreController : Controller
     {
-        private IDocumentSession _documentStore;
+        //private IDocumentSession _documentStore;
         private IProductRepository _productRepository;
 
-        public StoreController(IDocumentSession documentStore)
-        {
-            _documentStore = documentStore;
-        }
-
-        //public StoreController(IProductRepository productRepository)
+        //public StoreController(IDocumentSession documentStore)
         //{
-        //    _productRepository = productRepository;
+        //    _documentStore = documentStore;
         //}
+
+        public StoreController(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
         
         //
         // GET: /Store/
 
         public ActionResult Index()
         {
-            var result = _documentStore.Query<ProductModel>().OrderByDescending(pm => pm.Id).ToArray();
+            //var result = _documentStore.Query<ProductModel>().OrderByDescending(pm => pm.Id).ToArray();
 
-            //var result = _productRepository.ListProducts();
+            var result = _productRepository.ListProducts();
 
             return View(result);
         }
@@ -60,8 +60,8 @@ namespace PusherMvc.Web.Controllers
         {
             try
             {
-                _documentStore.Store(product);
-                //_productRepository.CreateProduct(product);
+//                _documentStore.Store(product);
+                _productRepository.CreateProduct(product);
 
                 return RedirectToAction("Index");
             }

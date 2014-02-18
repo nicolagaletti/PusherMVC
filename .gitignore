@@ -108,9 +108,11 @@ Backup*/
 UpgradeLog*.XML
 
 # RavenDB
+**/RavenDB/Data
 **/RavenDB/Database/
 **/RavenDB/Plugins/
 **/RavenDB/Analyzers/
+**/RavenDB/Indexes/
 **/RavenDB/Raven/
 !**/RavenDB/
 !**/RavenDB/[Bb]in/
