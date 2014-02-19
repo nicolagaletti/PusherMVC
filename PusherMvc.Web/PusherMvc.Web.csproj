@@ -280,6 +280,12 @@
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PusherMvc.Data\PusherMvc.Data.csproj">
+      <Project>{021308fe-d6b0-4cca-ab45-def952011cbd}</Project>
+      <Name>PusherMvc.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
