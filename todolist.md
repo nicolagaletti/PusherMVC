@@ -1,7 +1,7 @@
 ###TODO
 
-- [ ] Created data project
-- [ ] Move repositories int data project
+- [x] Created data project
+- [x] Move repositories into data project
 - [ ] Write unit tests for repositories
 - [x] Install Automapper
 - [ ] Create appropriate config class in App_Start
