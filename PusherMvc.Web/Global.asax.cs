@@ -64,8 +64,7 @@ namespace PusherMvc.Web
             //    {
             //        var producRepository = new ProductRepository();
             //    }).As<IProductRepository>.SingleInstance();
-
-            builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerHttpRequest();
             
             //register controllers to leverage autofac MVC
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
