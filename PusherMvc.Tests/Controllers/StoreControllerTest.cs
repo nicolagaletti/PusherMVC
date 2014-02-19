@@ -1,14 +1,8 @@
 ﻿using Moq;
 using NUnit.Framework;
-using PusherMvc.Web.Contracts;
+using PusherMvc.Data.Contracts;
 using PusherMvc.Web.Controllers;
 using PusherMvc.Web.Models;
-using Raven.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PusherMvc.Tests.Controllers
 {

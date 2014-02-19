@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PusherMvc.Web.Models
 {
-    public class ProductModel
+    public class ProductListItem
     {
         public string Id
         {
@@ -13,13 +13,7 @@ namespace PusherMvc.Web.Models
             set;
         }
 
-        public string Title
-        {
-            get;
-            set;
-        }
-
-        public string Description
+        public string Header
         {
             get;
             set;
@@ -31,12 +25,7 @@ namespace PusherMvc.Web.Models
             set;
         }
 
-        public string StockStatus
-        {
-            get
-            {
-                return (StockLevel > 0 ? "In Stock" : "Out of Stock");
-            }
-        }
+        public string Test { get; set; }
+
     }
 }

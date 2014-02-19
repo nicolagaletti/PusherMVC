@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Raven.Client;
-using PusherMvc.Web.Contracts;
+﻿using System.Web.Mvc;
+using AutoMapper;
+using PusherMvc.Data.Contracts;
+using PusherMvc.Data.Entities;
 using PusherMvc.Web.Models;
+using Raven.Client.Linq;
 
 namespace PusherMvc.Web.Controllers
 {
     public class StoreController : Controller
     {
-        //private IDocumentSession _documentStore;
-        private IProductRepository _productRepository;
-
-        //public StoreController(IDocumentSession documentStore)
-        //{
-        //    _documentStore = documentStore;
-        //}
+        private readonly IProductRepository _productRepository;
 
         public StoreController(IProductRepository productRepository)
         {
@@ -29,11 +21,11 @@ namespace PusherMvc.Web.Controllers
 
         public ActionResult Index()
         {
-            //var result = _documentStore.Query<ProductModel>().OrderByDescending(pm => pm.Id).ToArray();
-
             var result = _productRepository.ListProducts();
 
-            return View(result);
+            var viewModelResults = Mapper.Map<Product[], ProductModel[]>(result);
+
+            return View(viewModelResults);
         }
 
         //
@@ -60,8 +52,9 @@ namespace PusherMvc.Web.Controllers
         {
             try
             {
-//                _documentStore.Store(product);
-                _productRepository.CreateProduct(product);
+                var dataItem = Mapper.Map<ProductModel, Product>(product);
+                
+                _productRepository.CreateProduct(dataItem);
 
                 return RedirectToAction("Index");
             }
