@@ -14,11 +14,15 @@ namespace PusherMvc.Web.Mappings
         {
             base.Configure();
 
-            Mapper.CreateMap<Product, ProductListItem>()
-                .ForMember(vm => vm.Header, opt => opt.MapFrom(p => p.Title))
-                .ForMember(vm => vm.Test, opt => opt.Ignore());
+            Mapper.CreateMap<Product, ProductListItemViewModel>()
+                .ForMember(vm => vm.Header, opt => opt.MapFrom(p => p.Title));
+                //.ForMember(vm => vm.Test, opt => opt.Ignore());
 
-            Mapper.CreateMap<ProductModel, Product>();
+            Mapper.CreateMap<AddProductViewModel, Product>();
+
+            Mapper.CreateMap<ProductListItemViewModel, Product>()
+                .ForMember(p => p.Title, opt => opt.MapFrom(vm => vm.Header))
+                .ForMember(p => p.Description, opt => opt.Ignore());
         }
     }
 }

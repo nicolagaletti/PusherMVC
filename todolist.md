@@ -4,6 +4,6 @@
 - [x] Move repositories into data project
 - [ ] Write unit tests for repositories
 - [x] Install Automapper
-- [ ] Create appropriate config class in App_Start
-- [ ] Create ViewModels and map them to entities (product)
+- [x] Create appropriate config class in App_Start
+- [x] Create ViewModels and map them to entities (product)
 - [ ] Finish writing unit tests for web project

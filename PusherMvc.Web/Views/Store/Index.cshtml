@@ -1,4 +1,4 @@
-﻿@model PusherMvc.Web.Models.ProductModel[]
+﻿@model PusherMvc.Web.Models.ProductListItemViewModel[]
 
 @{
     ViewBag.Title = "Index";
@@ -32,7 +32,7 @@
         {
             <tr>
                 <td>@Html.DisplayFor(p => product.Id)</td>
-                <td>@Html.DisplayFor(p => product.Title)</td>
+                <td>@Html.DisplayFor(p => product.Header)</td>
                 <td>@Html.DisplayFor(p => product.StockLevel)</td>
             </tr>
         }

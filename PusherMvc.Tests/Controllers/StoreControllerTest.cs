@@ -9,10 +9,10 @@ namespace PusherMvc.Tests.Controllers
     [TestFixture]
     public class StoreControllerTest
     {
-        private readonly ProductModel product = new ProductModel
+        private readonly AddProductViewModel _addProductView = new AddProductViewModel
             {
                 Id = "ProductModels-2",
-                Title = "Test product",
+                Title = "Test _addProductView",
                 Description = "Test description",
                 StockLevel = 10
             };

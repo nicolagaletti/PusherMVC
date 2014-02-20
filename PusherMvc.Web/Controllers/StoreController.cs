@@ -23,7 +23,7 @@ namespace PusherMvc.Web.Controllers
         {
             var result = _productRepository.ListProducts();
 
-            var viewModelResults = Mapper.Map<Product[], ProductModel[]>(result);
+            var viewModelResults = Mapper.Map<Product[], ProductListItemViewModel[]>(result);
 
             return View(viewModelResults);
         }
@@ -48,11 +48,11 @@ namespace PusherMvc.Web.Controllers
         // POST: /Store/Create
 
         [HttpPost]
-        public ActionResult CreateProduct(ProductModel product)
+        public ActionResult CreateProduct(AddProductViewModel _addProductView)
         {
             try
             {
-                var dataItem = Mapper.Map<ProductModel, Product>(product);
+                var dataItem = Mapper.Map<AddProductViewModel, Product>(_addProductView);
                 
                 _productRepository.CreateProduct(dataItem);
 

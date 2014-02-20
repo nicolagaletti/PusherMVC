@@ -185,8 +185,8 @@
     </Compile>
     <Compile Include="Mappings\ProductMapper.cs" />
     <Compile Include="Models\ProductImage.cs" />
-    <Compile Include="Models\ProductListItem.cs" />
-    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductListItemViewModel.cs" />
+    <Compile Include="Models\AddProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

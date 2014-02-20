@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PusherMvc.Web.Models
 {
-    public class ProductModel
+    public class AddProductViewModel
     {
         public string Id
         {
