@@ -9,7 +9,7 @@ namespace PusherMvc.Tests.Controllers
     [TestFixture]
     public class StoreControllerTest
     {
-        private readonly AddProductViewModel _addProductView = new AddProductViewModel
+        private readonly AddProductViewModel addProductViewModel = new AddProductViewModel
             {
                 Id = "ProductModels-2",
                 Title = "Test _addProductView",
@@ -29,6 +29,20 @@ namespace PusherMvc.Tests.Controllers
 
             //Assert
             productRepository.Verify(pr => pr.ListProducts(), Times.Once);
+        }
+
+        [Test]
+        public void CreateProduct_Product_CallsCreateProduct()
+        {
+            //Arrange
+            var productRepository = new Mock<IProductRepository>();
+            StoreController storeController = new StoreController(productRepository.Object);
+
+            //Act
+            storeController.CreateProduct(addProductViewModel);
+
+            //Assert
+            productRepository.Verify(pr => pr.CreateProduct(new Data.Entities.Product()), Times.Once);
         }
     }
 
