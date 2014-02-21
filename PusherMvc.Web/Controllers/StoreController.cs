@@ -2,6 +2,8 @@
 using AutoMapper;
 using PusherMvc.Data.Contracts;
 using PusherMvc.Data.Entities;
+using PusherMvc.Web.App_Start;
+using PusherMvc.Web.Mappings;
 using PusherMvc.Web.Models;
 using Raven.Client.Linq;
 
@@ -48,11 +50,11 @@ namespace PusherMvc.Web.Controllers
         // POST: /Store/Create
 
         [HttpPost]
-        public ActionResult CreateProduct(AddProductViewModel _addProductView)
+        public ActionResult CreateProduct(AddProductViewModel addProductViewModel)
         {
             try
             {
-                var dataItem = Mapper.Map<AddProductViewModel, Product>(_addProductView);
+                Product dataItem = Mapper.Map<AddProductViewModel, Product>(addProductViewModel);
                 
                 _productRepository.CreateProduct(dataItem);
 

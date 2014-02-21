@@ -18,7 +18,10 @@ namespace PusherMvc.Web.Mappings
                 .ForMember(vm => vm.Header, opt => opt.MapFrom(p => p.Title));
                 //.ForMember(vm => vm.Test, opt => opt.Ignore());
 
-            Mapper.CreateMap<AddProductViewModel, Product>();
+            Mapper.CreateMap<AddProductViewModel, Product>()
+                .ForMember(p => p.StockStatus, opt => opt.Ignore());
+            Mapper.CreateMap<Product, AddProductViewModel>();
+                
 
             Mapper.CreateMap<ProductListItemViewModel, Product>()
                 .ForMember(p => p.Title, opt => opt.MapFrom(vm => vm.Header))

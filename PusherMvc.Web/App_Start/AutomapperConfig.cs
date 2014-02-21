@@ -17,7 +17,7 @@ namespace PusherMvc.Web.App_Start
 
         private static void Mappings(IConfiguration configuration)
         {
-            configuration.AddProfile<ProductMapper>();            
+            configuration.AddProfile<ProductMapper>();
         }
     }
 }

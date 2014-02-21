@@ -1,21 +1,37 @@
 ﻿using Moq;
 using NUnit.Framework;
 using PusherMvc.Data.Contracts;
+using PusherMvc.Data.Entities;
+using PusherMvc.Web.App_Start;
 using PusherMvc.Web.Controllers;
 using PusherMvc.Web.Models;
 
-namespace PusherMvc.Tests.Controllers
+namespace PusherMvc.Web.Tests.Controllers
 {
     [TestFixture]
     public class StoreControllerTest
     {
-        private readonly AddProductViewModel addProductViewModel = new AddProductViewModel
+        private readonly AddProductViewModel _addProductViewModel = new AddProductViewModel
             {
-                Id = "ProductModels-2",
-                Title = "Test _addProductView",
-                Description = "Test description",
+                Id = null,
+                Title = "Test Title",
+                Description = null,
                 StockLevel = 10
             };
+
+        private readonly Product _expectedProduct = new Product
+        {
+            Id = null,
+            Title = "Test Title",
+            Description = null,
+            StockLevel = 10
+        };
+
+        [SetUp]
+        public void SetUp()
+        {
+            AutomapperConfig.RegisterMappings();
+        }
 
         [Test]
         public void Index_NoInput_CallsListProducts()
@@ -36,13 +52,17 @@ namespace PusherMvc.Tests.Controllers
         {
             //Arrange
             var productRepository = new Mock<IProductRepository>();
+
+            productRepository.Setup(p =>
+                p.CreateProduct(_expectedProduct));
+
             StoreController storeController = new StoreController(productRepository.Object);
 
             //Act
-            storeController.CreateProduct(addProductViewModel);
+            storeController.CreateProduct(_addProductViewModel);
 
             //Assert
-            productRepository.Verify(pr => pr.CreateProduct(new Data.Entities.Product()), Times.Once);
+            productRepository.Verify(pr => pr.CreateProduct(_expectedProduct), Times.Once);
         }
     }
 

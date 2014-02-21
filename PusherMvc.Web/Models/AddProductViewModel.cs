@@ -30,13 +30,5 @@ namespace PusherMvc.Web.Models
             get;
             set;
         }
-
-        public string StockStatus
-        {
-            get
-            {
-                return (StockLevel > 0 ? "In Stock" : "Out of Stock");
-            }
-        }
     }
 }
