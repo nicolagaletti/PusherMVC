@@ -2,7 +2,7 @@
 
 - [x] Created data project
 - [x] Move repositories into data project
-- [ ] Write unit tests for repositories
+- [x] Write unit tests for repositories
 - [x] Install Automapper
 - [x] Create appropriate config class in App_Start
 - [x] Create ViewModels and map them to entities (product)
