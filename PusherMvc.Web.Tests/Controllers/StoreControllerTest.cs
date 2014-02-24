@@ -3,6 +3,7 @@ using NUnit.Framework;
 using PusherMvc.Data.Contracts;
 using PusherMvc.Data.Entities;
 using PusherMvc.Web.App_Start;
+using PusherMvc.Web.Contracts;
 using PusherMvc.Web.Controllers;
 using PusherMvc.Web.Models;
 
@@ -37,28 +38,29 @@ namespace PusherMvc.Web.Tests.Controllers
         public void Index_NoInput_CallsListProducts()
         {
             //Arrange
-            var productRepository = new Mock<IProductRepository>();
-            var storeController = new StoreController(productRepository.Object);
+            var productService = new Mock<IProductService>();
+            var pusherService = new Mock<IPusherService>();
+            var storeController = new StoreController(productService.Object, pusherService.Object);
 
             //Act
             storeController.Index();
 
             //Assert
-            productRepository.Verify(pr => pr.ListProducts(), Times.Once);
+            productService.Verify(pr => pr.ListProducts(), Times.Once);
         }
 
         [Test]
         public void CreateProduct_Product_CallsCreateProduct()
         {
-            //TODO: figure out why it doesn't think this gets called
-            
             //Arrange
-            var productRepository = new Mock<IProductRepository>();
+            var productRepository = new Mock<IProductService>();
 
             productRepository.Setup(p =>
                 p.CreateProduct(_expectedProduct));
 
-            var storeController = new StoreController(productRepository.Object);
+            var pusherService = new Mock<IPusherService>();
+
+            var storeController = new StoreController(productRepository.Object, pusherService.Object);
 
             //Act
             storeController.CreateProduct(_addProductViewModel);

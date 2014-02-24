@@ -28,15 +28,6 @@
 
 <div id="status"></div>
 
-@Ajax.ActionLink("Buy", "", new AjaxOptions())
+@Html.HiddenFor(m => m.Id)
 
-@section scripts {
-    <script>
-        var channel = pusher.subscribe("product-@Model.Id");
-
-        channel.bind("stockUpdated", function (product) {
-            $("#quantity").html(product.StockLevel);
-            $("#status").html(product.StockStatus);
-        });
-    </script>
-}
+@Ajax.ActionLink("Buy", "UpdateStock", new AjaxOptions())

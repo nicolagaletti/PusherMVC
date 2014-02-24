@@ -1,4 +1,5 @@
 ﻿using PusherMvc.Data.Contracts;
+using PusherMvc.Data.Entities;
 using PusherMvc.Web.Contracts;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,22 @@ namespace PusherMvc.Web.Services
             }
 
             return bought;
+        }
+
+        public Product GetProduct(string productId)
+        {
+            return _productRepository.GetProductById(productId);
+        }
+
+        public Product[] ListProducts()
+        {
+            return _productRepository.ListProducts();
+        }
+
+
+        public void CreateProduct(Product product)
+        {
+            _productRepository.CreateProduct(product);
         }
     }
 }

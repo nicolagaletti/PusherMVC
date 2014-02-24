@@ -7,3 +7,5 @@
 - [x] Create appropriate config class in App_Start
 - [x] Create ViewModels and map them to entities (product)
 - [ ] Finish writing unit tests for web project
+- [ ] Refactor failing tests
+- [ ] Fix broken Autofac reference to PusherService

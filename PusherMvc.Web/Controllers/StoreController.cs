@@ -8,17 +8,20 @@ using PusherMvc.Web.Models;
 using Raven.Client.Linq;
 using System.Configuration;
 using PusherServer;
+using PusherMvc.Web.Contracts;
+using System;
 
 namespace PusherMvc.Web.Controllers
 {
     public class StoreController : Controller
     {
-        private readonly IProductRepository _productRepository;
-        private IPusher _pusher;
+        private readonly IProductService _productService;
+        private IPusherService _pusherService;
 
-        public StoreController(IProductRepository productRepository)
+        public StoreController(IProductService productRepository, IPusherService pusherService)
         {
-            _productRepository = productRepository;
+            _productService = productRepository;
+            _pusherService = pusherService;
         }
         
         //
@@ -26,7 +29,7 @@ namespace PusherMvc.Web.Controllers
 
         public ActionResult Index()
         {
-            var result = _productRepository.ListProducts();
+            var result = _productService.ListProducts();
 
             var viewModelResults = Mapper.Map<Product[], ProductListItemViewModel[]>(result);
 
@@ -39,7 +42,7 @@ namespace PusherMvc.Web.Controllers
         [HttpGet]
         public ActionResult ProductDetails(string id)
         {
-            var result = _productRepository.GetProductById(id);
+            var result = _productService.GetProduct(id);
 
             var viewModelResult = Mapper.Map<Product, AddProductViewModel>(result);
             
@@ -64,7 +67,7 @@ namespace PusherMvc.Web.Controllers
             {
                 Product dataItem = Mapper.Map<AddProductViewModel, Product>(addProductViewModel);
                 
-                _productRepository.CreateProduct(dataItem);
+                _productService.CreateProduct(dataItem);
 
                 return RedirectToAction("Index");
             }
@@ -72,6 +75,21 @@ namespace PusherMvc.Web.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public JsonResult UpdateStock(string productId)
+        {
+            var product = _productService.GetProduct(productId);
+
+            if (product != null)
+            {
+                _pusherService.UpdateStock(product);
+
+                return Json(String.Format("'Success':'true'"));
+            }
+
+            return Json(String.Format("'Success':'false'"));
         }
 
         //
