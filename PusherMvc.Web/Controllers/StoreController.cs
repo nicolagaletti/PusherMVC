@@ -36,6 +36,7 @@ namespace PusherMvc.Web.Controllers
         //
         // GET: /Store/ProductDetails/products-5
 
+        [HttpGet]
         public ActionResult ProductDetails(string id)
         {
             var result = _productRepository.GetProductById(id);

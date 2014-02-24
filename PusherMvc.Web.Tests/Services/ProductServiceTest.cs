@@ -25,23 +25,31 @@ namespace PusherMvc.Web.Tests.Services
         {
             _availableProduct = new Product
             {
-                Description = "Test description",
+                Description = "UpdateStock_AvailableProduct_CallsPusher description",
                 Id = "1",
                 StockLevel = 10,
-                Title = "Test Title"
+                Title = "UpdateStock_AvailableProduct_CallsPusher Title"
             };
 
             _unavailableProduct = new Product
             {
-                Description = "Test description",
+                Description = "UpdateStock_AvailableProduct_CallsPusher description",
                 Id = "1",
                 StockLevel = 0,
-                Title = "Test Title"
+                Title = "UpdateStock_AvailableProduct_CallsPusher Title"
             };
 
             _productRepositoryMock = new Mock<IProductRepository>();
 
             AutomapperConfig.RegisterMappings();
+        }
+
+        [TearDown]
+        public void Dispose()
+        {
+            _availableProduct = null;
+            _unavailableProduct = null;
+            _productRepositoryMock = null;
         }
         
         [Test]

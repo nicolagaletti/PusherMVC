@@ -73,7 +73,7 @@ namespace PusherMvc.Web.App_Start
                 new NamedParameter("applicationId", ConfigurationManager.AppSettings["application_id"]),
                 new NamedParameter("applicationKey", ConfigurationManager.AppSettings["application_key"]),
                 new NamedParameter("applicaitonSecret", ConfigurationManager.AppSettings["application_secret"])
-                });
+                }).InstancePerLifetimeScope();
 
             //register controllers to leverage autofac MVC
             builder.RegisterControllers(Assembly.GetExecutingAssembly());

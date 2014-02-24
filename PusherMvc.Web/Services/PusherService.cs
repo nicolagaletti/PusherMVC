@@ -1,4 +1,5 @@
-﻿using PusherMvc.Web.Contracts;
+﻿using PusherMvc.Data.Entities;
+using PusherMvc.Web.Contracts;
 using PusherServer;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,12 @@ namespace PusherMvc.Web.Services
             _applicationId = applicationId;
         }
         
-        public void UpdateStock(string productId)
+        public void UpdateStock(Product product)
         {
-            throw new NotImplementedException();
+            if (product.StockLevel > 0)
+            {
+                _pusher.Trigger(String.Format("product-{0}", product.Id), "StockUpdated", product);
+            }
         }
     }
 }

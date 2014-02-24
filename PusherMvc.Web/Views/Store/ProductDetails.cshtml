@@ -28,9 +28,10 @@
 
 <div id="status"></div>
 
+@Ajax.ActionLink("Buy", "", new AjaxOptions())
+
 @section scripts {
     <script>
-        alert("I'm in!!");
         var channel = pusher.subscribe("product-@Model.Id");
 
         channel.bind("stockUpdated", function (product) {
