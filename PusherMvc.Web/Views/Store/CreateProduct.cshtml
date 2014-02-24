@@ -33,10 +33,16 @@
                 @Html.ValidationMessageFor(m => m.Title)
             </li>
             <li>
+                @Html.LabelFor(m => m.Description)
+                @Html.TextAreaFor(m => m.Description)
+                @Html.ValidationMessageFor(m => m.Description)
+            </li>
+            <li>
                 @Html.LabelFor(m => m.StockLevel)
                 @Html.TextBoxFor(m => m.StockLevel)
                 @Html.ValidationMessageFor(m => m.StockLevel)
             </li>
+
         </ol>
         <input type="submit" value="Add" />
     </fieldset>

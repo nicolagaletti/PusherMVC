@@ -17,6 +17,13 @@ namespace PusherMvc.Web.App_Start
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/pusher").Include(
+                        "~/Scripts/pusher.min.js"));
+
+            //custom.js
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                "~/Scripts/custom.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));

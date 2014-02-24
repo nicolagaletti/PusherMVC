@@ -48,6 +48,7 @@ namespace PusherMvc.Web.Tests.Controllers
         }
 
         [Test]
+        [Ignore]
         public void CreateProduct_Product_CallsCreateProduct()
         {
             //Arrange

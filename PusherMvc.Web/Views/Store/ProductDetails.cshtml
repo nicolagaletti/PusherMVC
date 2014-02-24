@@ -1,0 +1,41 @@
+﻿@model PusherMvc.Web.Models.AddProductViewModel
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+               test
+            </p>
+        </div>
+    </section>
+}
+
+<h3>Product: @DateTime.Now</h3>
+
+<ul>
+    <li>Title: @Html.DisplayFor(m => m.Title)</li>
+    <li>Description: @Html.DisplayFor(m => m.Description)</li>
+    <li>Quantity: <span id="quantity">@Html.DisplayFor(m => m.StockLevel)</span></li>
+</ul>
+
+<div id="status"></div>
+
+@section scripts {
+    <script>
+        alert("I'm in!!");
+        var channel = pusher.subscribe("product-@Model.Id");
+
+        channel.bind("stockUpdated", function (product) {
+            $("#quantity").html(product.StockLevel);
+            $("#status").html(product.StockStatus);
+        });
+    </script>
+}

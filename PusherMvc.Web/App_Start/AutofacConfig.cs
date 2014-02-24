@@ -11,6 +11,9 @@ using PusherMvc.Data.Repositories;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Raven.Database.Server;
+using PusherMvc.Web.Services;
+using PusherMvc.Web.Contracts;
+using System.Configuration;
 
 namespace PusherMvc.Web.App_Start
 {
@@ -56,11 +59,21 @@ namespace PusherMvc.Web.App_Start
 
             #endregion
 
-            //builder.Register(pr =>
-            //    {
-            //        var producRepository = new ProductRepository();
-            //    }).As<IProductRepository>.SingleInstance();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerHttpRequest();
+            builder.RegisterType<ProductRepository>()
+                .As<IProductRepository>()
+                .InstancePerHttpRequest();
+            
+            builder.RegisterType<ProductService>()
+                .As<IProductService>()
+                .InstancePerHttpRequest();
+
+            builder.RegisterType<PusherService>()
+                .As<IPusherService>()
+                .WithParameters(new List<NamedParameter>() {
+                new NamedParameter("applicationId", ConfigurationManager.AppSettings["application_id"]),
+                new NamedParameter("applicationKey", ConfigurationManager.AppSettings["application_key"]),
+                new NamedParameter("applicaitonSecret", ConfigurationManager.AppSettings["application_secret"])
+                });
 
             //register controllers to leverage autofac MVC
             builder.RegisterControllers(Assembly.GetExecutingAssembly());

@@ -11,5 +11,6 @@ namespace PusherMvc.Data.Contracts
     {
         void CreateProduct(Product product);
         Product[] ListProducts();
+        Product GetProductById(string Id);
     }
 }

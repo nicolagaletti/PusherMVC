@@ -27,5 +27,10 @@ namespace PusherMvc.Data.Repositories
         {
             return _documentSession.Query<Product>().ToArray();
         }
+
+        public Product GetProductById(string Id)
+        {
+            return _documentSession.Load<Product>(Id);
+        }
     }
 }

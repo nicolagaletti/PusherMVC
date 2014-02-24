@@ -6,12 +6,15 @@ using PusherMvc.Web.App_Start;
 using PusherMvc.Web.Mappings;
 using PusherMvc.Web.Models;
 using Raven.Client.Linq;
+using System.Configuration;
+using PusherServer;
 
 namespace PusherMvc.Web.Controllers
 {
     public class StoreController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private IPusher _pusher;
 
         public StoreController(IProductRepository productRepository)
         {
@@ -31,11 +34,15 @@ namespace PusherMvc.Web.Controllers
         }
 
         //
-        // GET: /Store/Details/5
+        // GET: /Store/ProductDetails/products-5
 
-        public ActionResult Details(int id)
+        public ActionResult ProductDetails(string id)
         {
-            return View();
+            var result = _productRepository.GetProductById(id);
+
+            var viewModelResult = Mapper.Map<Product, AddProductViewModel>(result);
+            
+            return View(viewModelResult);
         }
 
         //

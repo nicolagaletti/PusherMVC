@@ -31,10 +31,11 @@
         @foreach (var product in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(p => product.Id)</td>
+                <td>@Html.ActionLink(product.Id, "ProductDetails", new { id = product.Id })</td>
                 <td>@Html.DisplayFor(p => product.Header)</td>
                 <td>@Html.DisplayFor(p => product.StockLevel)</td>
             </tr>
         }
     </tbody>
 </table>
+@Html.ActionLink("Add Product", "CreateProduct")
