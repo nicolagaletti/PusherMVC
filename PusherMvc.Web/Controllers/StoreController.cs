@@ -78,18 +78,23 @@ namespace PusherMvc.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateStock(string productId)
+        public ActionResult UpdateStock(string productId)
         {
-            var product = _productService.GetProduct(productId);
-
-            if (product != null)
+            try
             {
-                _pusherService.UpdateStock(product);
+                var product = _productService.GetProduct(productId);
 
-                return Json(String.Format("'Success':'true'"));
+                if (product != null)
+                {
+                    _pusherService.UpdateStock(product);
+                }
+
+                return RedirectToAction("ProductDetails");
             }
-
-            return Json(String.Format("'Success':'false'"));
+            catch
+            {
+                return View();
+            }
         }
 
         //

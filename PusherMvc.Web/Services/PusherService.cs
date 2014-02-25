@@ -12,16 +12,9 @@ namespace PusherMvc.Web.Services
     {
         private IPusher _pusher;
 
-        private string _applicationKey;
-        private string _applicaitonSecret;
-        private string _applicationId;
-
-        public PusherService(IPusher pusher, string applicationKey, string applicationSecret, string applicationId)
+        public PusherService(IPusher pusher)
         {
             _pusher = pusher;
-            _applicationKey = applicationKey;
-            _applicaitonSecret = applicationSecret;
-            _applicationId = applicationId;
         }
         
         public void UpdateStock(Product product)

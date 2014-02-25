@@ -63,7 +63,7 @@ namespace PusherMvc.Web.Tests.Services
             //Arrange
             _pusherMock.Setup(m => m.Trigger(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Product>()));
 
-            var pusherService = new PusherService(_pusherMock.Object, "", "", "");
+            var pusherService = new PusherService(_pusherMock.Object);
 
             //Act
             pusherService.UpdateStock(_availableProduct);
@@ -78,7 +78,7 @@ namespace PusherMvc.Web.Tests.Services
             //Arrange
             _pusherMock.Setup(m => m.Trigger(It.IsAny<string>(), It.IsAny<string>(), _unavailableProduct));
 
-            var pusherService = new PusherService(_pusherMock.Object, "", "", "");
+            var pusherService = new PusherService(_pusherMock.Object);
 
             //Act
             pusherService.UpdateStock(_unavailableProduct);

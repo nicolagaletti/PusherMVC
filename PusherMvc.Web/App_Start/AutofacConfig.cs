@@ -62,6 +62,11 @@ namespace PusherMvc.Web.App_Start
 
             builder.RegisterType<Pusher>()
                 .As<IPusher>()
+                .WithParameters(new List<NamedParameter>() {
+                new NamedParameter("appId", ConfigurationManager.AppSettings["application_id"]),
+                new NamedParameter("appKey", ConfigurationManager.AppSettings["application_key"]),
+                new NamedParameter("appSecret", ConfigurationManager.AppSettings["application_secret"])
+                })
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductRepository>()
@@ -74,11 +79,7 @@ namespace PusherMvc.Web.App_Start
 
             builder.RegisterType<PusherService>()
                 .As<IPusherService>()
-                .WithParameters(new List<NamedParameter>() {
-                new NamedParameter("applicationId", ConfigurationManager.AppSettings["application_id"]),
-                new NamedParameter("applicationKey", ConfigurationManager.AppSettings["application_key"]),
-                new NamedParameter("applicaitonSecret", ConfigurationManager.AppSettings["application_secret"])
-                }).InstancePerLifetimeScope();
+                .InstancePerLifetimeScope();
 
 
 

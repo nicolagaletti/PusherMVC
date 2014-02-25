@@ -122,6 +122,7 @@ namespace PusherMvc.Web.Tests.Services
             Assert.IsFalse(result);
         }
 
+        [Test]
         public void BuyProduct_NullProduct_ReturnsFalse()
         {
             //Arrange
@@ -135,6 +136,50 @@ namespace PusherMvc.Web.Tests.Services
 
             //Assert
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void CreateProduct_AnyProduct_CallsProductRepositoryCreateProduct()
+        {
+            //Arrange
+            _productRepositoryMock.Setup(m => m.CreateProduct(It.IsAny<Product>()));
+            var productService = new ProductService(_productRepositoryMock.Object);
+            
+            //Act
+            productService.CreateProduct(_availableProduct);
+
+            //Assert
+            _productRepositoryMock.Verify(v => v.CreateProduct(It.IsAny<Product>()), Times.Once);
+        }
+
+        [Test]
+        public void ListProducts_Nothing_CallsProductRepositoryListProducts()
+        {
+            //Arrange
+            _productRepositoryMock.Setup(m => m.ListProducts())
+                .Returns(It.IsAny<Product[]>());
+            var productService = new ProductService(_productRepositoryMock.Object);
+
+            //Act
+            productService.ListProducts();
+
+            //Assert
+            _productRepositoryMock.Verify(v => v.ListProducts(), Times.Once);
+        }
+
+        [Test]
+        public void GetProduct_Nothing_CallsProductRepositoryGetProduct()
+        {
+            //Arrange
+            _productRepositoryMock.Setup(m => m.GetProductById(It.IsAny<string>()))
+                .Returns(It.IsAny<Product>());
+            var productService = new ProductService(_productRepositoryMock.Object);
+
+            //Act
+            productService.GetProduct("");
+
+            //Assert
+            _productRepositoryMock.Verify(v => v.GetProductById(It.IsAny<string>()), Times.Once);
         }
     }
 }
