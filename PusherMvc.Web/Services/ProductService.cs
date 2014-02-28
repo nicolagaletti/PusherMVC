@@ -1,4 +1,5 @@
-﻿using PusherMvc.Data.Contracts;
+﻿using Microsoft.Ajax.Utilities;
+using PusherMvc.Data.Contracts;
 using PusherMvc.Data.Entities;
 using PusherMvc.Web.Contracts;
 using System;
@@ -21,14 +22,16 @@ namespace PusherMvc.Web.Services
         {
             var bought = false;
 
-            var product = _productRepository.GetProductById(productId);
-
-            if (product != null && product.StockLevel > 0)
+            if (!productId.IsNullOrWhiteSpace())
             {
-                product.StockLevel--;
-                bought = true;
-            }
+                var product = _productRepository.GetProductById(productId);
 
+                if (product != null && product.StockLevel > 0)
+                {
+                    product.StockLevel--;
+                    bought = true;
+                }
+            }
             return bought;
         }
 

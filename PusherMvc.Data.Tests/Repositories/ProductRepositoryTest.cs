@@ -23,10 +23,10 @@ namespace PusherMvc.Data.Tests.Repositories
         {
             _product = new Product
             {
-                Description = "Test description",
+                Description = "Product_Available_ReturnInStock description",
                 Id = "1",
                 StockLevel = 10,
-                Title = "Test Title"
+                Title = "Product_Available_ReturnInStock Title"
             };
 
             _documentSessionMock = new Mock<IDocumentSession>();

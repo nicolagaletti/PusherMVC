@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 using AutoMapper;
 using PusherMvc.Data.Contracts;
 using PusherMvc.Data.Entities;
@@ -82,18 +83,20 @@ namespace PusherMvc.Web.Controllers
         {
             try
             {
-                var product = _productService.GetProduct(productId);
+                var bought = _productService.BuyProduct(productId);
 
-                if (product != null)
+                if (bought)
                 {
+                    var product = _productService.GetProduct(productId);
+                    
                     _pusherService.UpdateStock(product);
                 }
 
-                return RedirectToAction("ProductDetails");
+                return RedirectToAction("ProductDetails", new {id = productId});
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 

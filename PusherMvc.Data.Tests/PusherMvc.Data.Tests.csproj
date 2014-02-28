@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ProductTest.cs" />
     <Compile Include="Fakes\FakeRavenQueryable.cs" />
     <Compile Include="Repositories\ProductRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

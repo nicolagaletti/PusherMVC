@@ -28,6 +28,16 @@
 
 <div id="status"></div>
 
-@Html.HiddenFor(m => m.Id, new { id = "productId"})
+<input type="hidden" id="productId" value="@Html.ValueFor(m => m.Id)"/>
+<a id="BuyButton" href="#" >Buy</a>
 
-@Ajax.ActionLink("Buy", "UpdateStock", "StoreController", new { productId = @Model.Id }, new AjaxOptions { UpdateTargetId = "updateTargetId"})
+@*@using (Ajax.BeginForm("UpdateStock", "StoreController", new AjaxOptions()
+{
+    HttpMethod = "post"
+}))
+{
+    @Html.HiddenFor(m => m.Id, new { id = "productId"})
+    <input type="submit" id="submit" name="submit" value="Buy"/>
+}*@
+
+@*@Ajax.ActionLink("Buy", "UpdateStock", "StoreController", new { productId = @Model.Id }, new AjaxOptions { UpdateTargetId = "updateTargetId"})*@

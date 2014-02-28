@@ -51,7 +51,41 @@ namespace PusherMvc.Web.Tests.Services
             _unavailableProduct = null;
             _productRepositoryMock = null;
         }
-        
+
+        [Test]
+        public void BuyProduct_NullProductId_ReturnsFalse()
+        {
+            _productRepositoryMock.Setup(m => m.GetProductById(null))
+                .Returns<Product>(null);
+
+            var productService = new ProductService(_productRepositoryMock.Object);
+
+            //Act
+            var result = productService.BuyProduct(null);
+
+            //Assert
+            {
+                Assert.IsFalse(result);
+            }
+        }
+
+        [Test]
+        public void BuyProduct_EmptyProductId_ReturnsFalse()
+        {
+            _productRepositoryMock.Setup(m => m.GetProductById(""))
+                .Returns<Product>(null);
+
+            var productService = new ProductService(_productRepositoryMock.Object);
+
+            //Act
+            var result = productService.BuyProduct("");
+
+            //Assert
+            {
+                Assert.IsFalse(result);
+            }
+        }
+
         [Test]
         public void BuyProduct_ValidId_VerifyRepositoryIsCalled()
         {
