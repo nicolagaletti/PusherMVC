@@ -5,7 +5,7 @@
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-if (getParameterByName("debug").length > 0) {
+if (typeof getParameterByName("debug") !== "undefined") {
     Pusher.log = function(message) {
         var msg = document.createTextNode(message);
         var el = document.createElement("div");
@@ -15,14 +15,14 @@ if (getParameterByName("debug").length > 0) {
     };
 }
 
-jQuery.noConflict();
+//jQuery.noConflict();
 (function ($) {
     $(function () {
 
-        var configurePusher = function () {
+        var subscribeToProductDetailsChannel = function () {
             var productId = $("#productId").val();
 
-            if (productId.length > 0) {
+            if (typeof productId !== "undefined") {
                 var pusher = new Pusher("76ad3a948291ca99d5d7");
 
                 var channel = pusher.subscribe("product-" + productId);
@@ -37,7 +37,7 @@ jQuery.noConflict();
         var triggerBuy = function() {
             var productId = $("#productId").val();
 
-            if (productId.length > 0) {
+            if (typeof productId !== "undefined") {
                 $.ajax({
                     type: "POST",
                     url: "/Store/UpdateStock",
@@ -48,7 +48,29 @@ jQuery.noConflict();
                 );
             }
         };
-        configurePusher();
+
+        var loginToChatroom = function() {
+            var $this = $(this);
+            var loader = $('#chat_widget_login_loader');
+            var errorMessage = $('#chat_widget_login_error');
+
+            $this.hide();
+            loader.show();
+            errorMessage.hide();
+
+            var username = $('#chat_widget_username').val().replace(/[^a-z0-9]/gi, '');
+            
+            if (username.length > 0) {
+                //make the ajax call
+            } else {
+                errorMessage.show();
+                loader.hide();
+                $this.show();
+            }
+        };
+
+        subscribeToProductDetailsChannel();
         $('#BuyButton').on("click", triggerBuy);
+        $('#chat_widget_login_button').on('click', loginToChatroom);
     });
 })(jQuery);

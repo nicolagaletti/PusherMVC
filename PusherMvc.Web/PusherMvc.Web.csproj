@@ -181,6 +181,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Contracts\IProductService.cs" />
     <Compile Include="Contracts\IPusherService.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,7 +202,10 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Chat.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\ajax-loader.gif" />
+    <Content Include="Content\themes\base\images\heroAccent.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -289,6 +293,7 @@
     <Content Include="Views\Store\CreateProduct.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\ProductDetails.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
