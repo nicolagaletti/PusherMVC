@@ -11,6 +11,7 @@ using PusherMvc.Web.App_Start;
 using PusherMvc.Web.Services;
 using PusherRESTDotNet;
 using PusherServer;
+using PresenceChannelData = PusherRESTDotNet.Authentication.PresenceChannelData;
 
 namespace PusherMvc.Web.Tests.Services
 {
@@ -89,6 +90,42 @@ namespace PusherMvc.Web.Tests.Services
 
             //Assert
             _pusherMock.Verify(m => m.Trigger(It.IsAny<string>(), It.IsAny<string>(), _unavailableProduct), Times.Never);
+        }
+
+        [Test]
+        public void Auth_AnyInput_CallsPusherProvider()
+        {
+            //Arrange
+            _pusherProviderMock.Setup(m => m.Authenticate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<PresenceChannelData>()));
+
+            var pusherService = new PusherService(_pusherMock.Object, _pusherProviderMock.Object);
+
+            //Act
+            pusherService.Auth(It.IsAny<string>(), It.IsAny<string>());
+
+            //Assert
+            _pusherProviderMock.Verify(m => m.Authenticate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<PresenceChannelData>()));
+        }
+
+        [Test]
+        public void Auth_ValidInput_ReturnsString()
+        {
+            //Arrange
+            string channelName = "anychannel";
+            string socket = "anySocket";
+            var channelData = new PresenceChannelData() { user_id = Guid.NewGuid().ToString() };
+            var expectedResult = "expectedResult";
+
+            _pusherProviderMock.Setup(m => m.Authenticate(channelName, socket, channelData))
+                .Returns(expectedResult);
+
+            var pusherService = new PusherService(_pusherMock.Object, _pusherProviderMock.Object);
+
+            //Act
+            var result = pusherService.Auth(channelName, socket);
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
         }
 
         #endregion
