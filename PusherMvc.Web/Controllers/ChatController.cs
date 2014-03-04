@@ -13,5 +13,10 @@ namespace PusherMvc.Web.Controllers
         {
             return View();
         }
+
+        public JsonResult Auth(string channel_name, string socket_id)
+        {
+            return Json(new {test = "true"}, JsonRequestBehavior.AllowGet);
+        }
     }
 }

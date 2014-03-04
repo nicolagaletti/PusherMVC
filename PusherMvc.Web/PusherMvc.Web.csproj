@@ -80,6 +80,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PusherRESTDotNet">
+      <HintPath>..\packages\PusherRESTDotNet.1.2.0.26184\lib\net35\PusherRESTDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="PusherServer">
       <HintPath>..\packages\PusherServer.2.0.0-beta-4\lib\net35\PusherServer.dll</HintPath>
     </Reference>

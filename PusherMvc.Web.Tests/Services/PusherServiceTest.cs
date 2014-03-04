@@ -9,6 +9,7 @@ using PusherMvc.Data.Contracts;
 using PusherMvc.Data.Entities;
 using PusherMvc.Web.App_Start;
 using PusherMvc.Web.Services;
+using PusherRESTDotNet;
 using PusherServer;
 
 namespace PusherMvc.Web.Tests.Services
@@ -19,6 +20,7 @@ namespace PusherMvc.Web.Tests.Services
         private Product _availableProduct;
         private Product _unavailableProduct;
         private Mock<IPusher> _pusherMock;
+        private Mock<IPusherProvider> _pusherProviderMock;
         
         #region SetUp / TearDown
 
@@ -42,6 +44,7 @@ namespace PusherMvc.Web.Tests.Services
             };
 
             _pusherMock = new Mock<IPusher>();
+            _pusherProviderMock = new Mock<IPusherProvider>();
 
             AutomapperConfig.RegisterMappings();
         }
@@ -51,6 +54,7 @@ namespace PusherMvc.Web.Tests.Services
         {
             _availableProduct = null;
             _pusherMock = null;
+            _pusherProviderMock = null;
         }
 
         #endregion
@@ -63,7 +67,7 @@ namespace PusherMvc.Web.Tests.Services
             //Arrange
             _pusherMock.Setup(m => m.Trigger(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Product>()));
 
-            var pusherService = new PusherService(_pusherMock.Object);
+            var pusherService = new PusherService(_pusherMock.Object, _pusherProviderMock.Object);
 
             //Act
             pusherService.UpdateStock(_availableProduct);
@@ -78,7 +82,7 @@ namespace PusherMvc.Web.Tests.Services
             //Arrange
             _pusherMock.Setup(m => m.Trigger(It.IsAny<string>(), It.IsAny<string>(), _unavailableProduct));
 
-            var pusherService = new PusherService(_pusherMock.Object);
+            var pusherService = new PusherService(_pusherMock.Object, _pusherProviderMock.Object);
 
             //Act
             pusherService.UpdateStock(_unavailableProduct);

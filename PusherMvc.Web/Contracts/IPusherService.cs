@@ -10,5 +10,6 @@ namespace PusherMvc.Web.Contracts
     public interface IPusherService
     {
         void UpdateStock(Product product);
+        string Auth(string channelName, string socketId);
     }
 }

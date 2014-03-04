@@ -8,6 +8,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using PusherMvc.Data.Contracts;
 using PusherMvc.Data.Repositories;
+using PusherRESTDotNet;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Raven.Database.Server;
@@ -66,6 +67,15 @@ namespace PusherMvc.Web.App_Start
                 new NamedParameter("appId", ConfigurationManager.AppSettings["application_id"]),
                 new NamedParameter("appKey", ConfigurationManager.AppSettings["application_key"]),
                 new NamedParameter("appSecret", ConfigurationManager.AppSettings["application_secret"])
+                })
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<PusherProvider>()
+                .As<IPusherProvider>()
+                .WithParameters(new List<NamedParameter>() {
+                new NamedParameter("applicationId", ConfigurationManager.AppSettings["application_id"]),
+                new NamedParameter("applicationKey", ConfigurationManager.AppSettings["application_key"]),
+                new NamedParameter("applicationSecret", ConfigurationManager.AppSettings["application_secret"])
                 })
                 .InstancePerLifetimeScope();
 

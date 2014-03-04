@@ -61,12 +61,18 @@ if (typeof getParameterByName("debug") !== "undefined") {
             var username = $('#chat_widget_username').val().replace(/[^a-z0-9]/gi, '');
             
             if (username.length > 0) {
-                //make the ajax call
+                subscribeToChannel();
             } else {
                 errorMessage.show();
                 loader.hide();
                 $this.show();
             }
+        };
+
+        var subscribeToChannel = function() {
+            var pusher = new Pusher("76ad3a948291ca99d5d7");
+            pusher.channel_auth_endpoint = "/chat/auth";
+            pusher.subscribe('presence-pushermvcchat');
         };
 
         subscribeToProductDetailsChannel();
