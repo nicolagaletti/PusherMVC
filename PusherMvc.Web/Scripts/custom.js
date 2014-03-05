@@ -71,7 +71,7 @@ if (typeof getParameterByName("debug") !== "undefined") {
 
         var subscribeToChannel = function() {
             var pusher = new Pusher("76ad3a948291ca99d5d7");
-            pusher.channel_auth_endpoint = "/chat/auth";
+            pusher.channel_auth_endpoint = "/chat/Auth";
             pusher.subscribe('presence-pushermvcchat');
         };
 

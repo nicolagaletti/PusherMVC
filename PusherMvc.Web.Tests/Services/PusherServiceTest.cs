@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Web.Mvc;
 using Moq;
@@ -22,7 +23,7 @@ namespace PusherMvc.Web.Tests.Services
         private Product _unavailableProduct;
         private Mock<IPusher> _pusherMock;
         private Mock<IPusherProvider> _pusherProviderMock;
-        
+
         #region SetUp / TearDown
 
         [SetUp]
@@ -101,7 +102,7 @@ namespace PusherMvc.Web.Tests.Services
             var pusherService = new PusherService(_pusherMock.Object, _pusherProviderMock.Object);
 
             //Act
-            pusherService.Auth(It.IsAny<string>(), It.IsAny<string>());
+            pusherService.Auth(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>());
 
             //Assert
             _pusherProviderMock.Verify(m => m.Authenticate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<PresenceChannelData>()));
@@ -111,10 +112,10 @@ namespace PusherMvc.Web.Tests.Services
         public void Auth_ValidInput_ReturnsString()
         {
             //Arrange
-            string channelName = "anychannel";
-            string socket = "anySocket";
+            const string channelName = "anychannel";
+            const string socket = "anySocket";
             var channelData = new PresenceChannelData() { user_id = Guid.NewGuid().ToString() };
-            var expectedResult = "expectedResult";
+            const string expectedResult = "expectedResult";
 
             _pusherProviderMock.Setup(m => m.Authenticate(channelName, socket, channelData))
                 .Returns(expectedResult);
@@ -122,7 +123,7 @@ namespace PusherMvc.Web.Tests.Services
             var pusherService = new PusherService(_pusherMock.Object, _pusherProviderMock.Object);
 
             //Act
-            var result = pusherService.Auth(channelName, socket);
+            var result = pusherService.Auth(channelName, socket, "", new object());
 
             //Assert
             Assert.AreEqual(expectedResult, result);

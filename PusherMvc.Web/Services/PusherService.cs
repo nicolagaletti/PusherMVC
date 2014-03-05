@@ -1,4 +1,5 @@
-﻿using PusherMvc.Data.Entities;
+﻿using System.Security.Principal;
+using PusherMvc.Data.Entities;
 using PusherMvc.Web.Contracts;
 using PusherRESTDotNet;
 using PusherServer;
@@ -13,7 +14,7 @@ namespace PusherMvc.Web.Services
     public class PusherService : IPusherService
     {
         private readonly IPusher _pusher;
-        private IPusherProvider _pusherProvider;
+        private readonly IPusherProvider _pusherProvider;
 
         public PusherService(IPusher pusher, IPusherProvider pusherProvider)
         {
@@ -29,11 +30,12 @@ namespace PusherMvc.Web.Services
             }
         }
 
-        public string Auth(string channelName, string socketId)
+        public string Auth(string channelName, string socketId, string userName, object userInfo)
         {
             var channelData = new PresenceChannelData()
             {
-                user_id = Guid.NewGuid().ToString()
+                user_id = userName,
+                user_info = userInfo
             };
 
             return _pusherProvider.Authenticate(channelName, socketId, channelData);

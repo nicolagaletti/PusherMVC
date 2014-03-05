@@ -17,7 +17,7 @@ namespace PusherMvc.Web.Controllers
     public class StoreController : Controller
     {
         private readonly IProductService _productService;
-        private IPusherService _pusherService;
+        private readonly IPusherService _pusherService;
 
         public StoreController(IProductService productRepository, IPusherService pusherService)
         {
