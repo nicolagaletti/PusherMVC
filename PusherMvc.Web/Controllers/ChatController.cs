@@ -5,12 +5,17 @@ using System.Web;
 using System.Web.Mvc;
 using PusherMvc.Web.Contracts;
 using System.Security.Cryptography;
+using PusherMvc.Data.Builders;
 
 namespace PusherMvc.Web.Controllers
 {
     public class ChatController : Controller
     {
         private IPusherService _pusherService;
+        private const string USER_SESSION_NAME = "sessionuserid";
+        private const string USER_SESSION_ID = "userid";
+        private const string USER_SESSION_USERINFO = "SessionUserInfo";
+        private const string APP_USER_COUNT = "AppUserCount";
 
         public ChatController(IPusherService pusherService)
         {
@@ -26,26 +31,33 @@ namespace PusherMvc.Web.Controllers
         [HttpPost]
         public JsonResult StartSession(string username)
         {
-            if (Session["SessionUserId"] == null)
+            var appUserCount = HttpContext.Application[APP_USER_COUNT];
+            
+            if (appUserCount == null)
             {
-                Session["SessionUserId"] = username;
+                appUserCount = 0;
             }
 
-            if (Session["userid"] == null)
+            int newUserCount = ((int)appUserCount + 1);
+            HttpContext.Application[APP_USER_COUNT] = newUserCount;
+
+            appUserCount = newUserCount;
+
+            PusherMvc.Data.Entities.User user = new UserBuilder().WithName(username, (int)appUserCount).WithId(username, Session.SessionID).WithTimestamp();
+            
+            if (Session[USER_SESSION_NAME] == null)
             {
-                using (HashAlgorithm md5 = new MD5CryptoServiceProvider())
-                {
-                    var str = String.Format("{0}_{1}_{2}", DateTime.UtcNow.Ticks, username, Session.SessionID);
+                Session[USER_SESSION_NAME] = user.Name;
+            }
 
-                    byte[] bytes = new byte[str.Length * sizeof(char)];
-                    System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            if (Session[USER_SESSION_ID] == null)
+            {
+                Session[USER_SESSION_ID] = user.Id;
+            }
 
-                    var result = md5.ComputeHash(bytes);
-
-                    char[] chars = new char[result.Length / sizeof(char)];
-                    System.Buffer.BlockCopy(result, 0, chars, 0, result.Length);
-                    Session["userid"] = new string(chars);
-                }
+            if (Session[USER_SESSION_USERINFO] == null)
+            {
+                Session[USER_SESSION_USERINFO] = new { timestamp = user.Timestamp, username = user.Name };
             }
 
             return Json(new { success = "true" });
@@ -63,48 +75,21 @@ namespace PusherMvc.Web.Controllers
             }
             else
             {
-                if (Session["SessionUserId"] != null)
+                if (Session[USER_SESSION_NAME] != null)
                 {
-                    userName = (string)Session["SessionUserId"];
-                }
-                else
-                {
-                    if (HttpContext.Application["AppUserCount"] == null)
-                    {
-                        HttpContext.Application["AppUserCount"] = 0;
-                    }
-                    int newUserCount = ((int)HttpContext.Application["AppUserCount"] + 1);
-                    HttpContext.Application["AppUserCount"] = newUserCount;
-                    userName = "Guest " + newUserCount;
-                    Session["SessionUserId"] = userName;
+                    userName = (string)Session[USER_SESSION_NAME];
                 }
             }
 
-            if (Session["SessionUserInfo"] == null)
+            if (Session[USER_SESSION_ID] != null)
             {
-                var objUTC = DateTime.Now.ToUniversalTime();
-                var epoch = (objUTC.Ticks - 621355968000000000) / 10000;
-                Session["SessionUserInfo"] = new { timestamp = epoch };
+                userid = (string)Session[USER_SESSION_ID];
             }
 
-            if (Session["userid"] == null)
+            if (Session[USER_SESSION_USERINFO] != null)
             {
-                using (HashAlgorithm md5 = new MD5CryptoServiceProvider())
-                {
-                    var str = String.Format("{0}_{1}_{2}", DateTime.UtcNow.Ticks, userName, Session.SessionID);
-
-                    byte[] bytes = new byte[str.Length * sizeof(char)];
-                    System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-
-                    var hash = md5.ComputeHash(bytes);
-
-                    char[] chars = new char[hash.Length / sizeof(char)];
-                    System.Buffer.BlockCopy(hash, 0, chars, 0, hash.Length);
-                    Session["userid"] = new string(chars);
-                }
+                userInfo = Session["SessionUserInfo"];
             }
-
-            userInfo = Session["SessionUserInfo"];
 
             var result = _pusherService.Auth(channel_name, socket_id, userid, userInfo);
             
